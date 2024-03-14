@@ -1,0 +1,1 @@
+export { newUser } from "./waitlist";
