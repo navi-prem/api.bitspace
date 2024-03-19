@@ -3,7 +3,7 @@ import dotenv from "dotenv"
 import cors from 'cors'
 import serverless from "serverless-http"
 
-import { Waitlist } from "./routes"
+import { Waitlist, Timeline } from "./routes"
 
 dotenv.config()
 
@@ -24,6 +24,7 @@ app.use(express.json())
 
 // routes
 app.use(Waitlist.BASE_ROUTE, Waitlist.router)
+app.use(Timeline.BASE_ROUTE, Timeline.router)
 
 app.get("/gg", (_, res: Response) => {
     return res.json({ statusCode: 200, body: { message: process.env.TEST_MSG || "Hello world!" } })

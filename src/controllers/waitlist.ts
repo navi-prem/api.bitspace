@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { pool } from '../../db'
 import { newUser } from '../queries'
-import waitlistUserSchema from '../validators/waitlist'
+import { waitlistUserSchema } from '../validators'
 import { fromZodError } from 'zod-validation-error'
 
 export const addToWaitlist = async (req: Request, res: Response) => {
@@ -17,6 +17,6 @@ export const addToWaitlist = async (req: Request, res: Response) => {
         return res.status(200).json({ statusCode: 200, body: { message: "User added to waitlist successfully." , data } })
     } catch (err) {
         client.release()
-        return res.status(500).json({ statusCode: 500, body: { message: "Internal Server Error.", err } })
+        return res.status(400).json({ statusCode: 400, body: { message: "Failed to add user to waitlist.", err } })
     }
 }
