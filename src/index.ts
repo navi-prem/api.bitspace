@@ -1,8 +1,8 @@
-import express, { Express, Response } from "express"
+import express, { Express, NextFunction, Response } from "express"
 import dotenv from "dotenv"
 import cors from 'cors'
 import serverless from "serverless-http"
-
+import cookieParser from "cookie-parser"
 import { Waitlist, Timeline } from "./routes"
 
 dotenv.config()
@@ -21,6 +21,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(express.json())
+app.use(cookieParser())
 
 // routes
 app.use(Waitlist.BASE_ROUTE, Waitlist.router)
