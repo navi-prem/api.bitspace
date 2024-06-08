@@ -36,4 +36,6 @@ app.listen(port, () => {
    console.log(`[server]: http://localhost:${port}`)
 })
 
+export default app
+
 // export const handler = serverless(app)
