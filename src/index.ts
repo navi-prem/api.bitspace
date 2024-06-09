@@ -10,7 +10,7 @@ dotenv.config()
 const app: Express = express()
 const port: string = process.env.PORT || '3000'
 
-const allowedOrigins = ['https://bitspace.org.in', 'http://localhost:3000'];
+const allowedOrigins = "*";
 
 const corsOptions = {
   origin: allowedOrigins,
