@@ -1,2 +1,2 @@
 export { default as waitlistUserSchema } from './waitlist'
-export { default as timelineSchema } from './timeline'
+export { default as userSchema } from './user'

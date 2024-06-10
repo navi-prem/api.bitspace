@@ -3,7 +3,7 @@ import dotenv from "dotenv"
 import cors from 'cors'
 import serverless from "serverless-http"
 import cookieParser from "cookie-parser"
-import { Auth, Waitlist, Timeline } from "./routes"
+import { Auth, Waitlist, User } from "./routes"
 
 dotenv.config()
 
@@ -25,7 +25,7 @@ app.use(cookieParser())
 
 // routes
 app.use(Waitlist.BASE_ROUTE, Waitlist.router)
-app.use(Timeline.BASE_ROUTE, Timeline.router)
+app.use(User.BASE_ROUTE, User.router)
 app.use(Auth.BASE_ROUTE, Auth.router)
 
 app.get("/gg", (_, res: Response) => {

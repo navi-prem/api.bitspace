@@ -17,7 +17,7 @@ create table timelines (
 create table users (
     github_id varchar PRIMARY KEY,
     username varchar,
-    is_banned boolean,
+    is_banned boolean DEFAULT (false),
     title varchar(64),
     created_at timestamptz DEFAULT now(),
     discord_id varchar,

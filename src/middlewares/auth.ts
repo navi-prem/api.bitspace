@@ -6,7 +6,7 @@ import { Auth } from "../queries";
 
 dotenv.config()
 
-const AuthMiddleware: (req: Request, res: Response, next: NextFunction, rank: number) => Promise<void> = async (req: Request, res: Response, next: NextFunction, rank: number) => {
+const AuthMiddleware: (req: Request, res: Response, next: NextFunction, rank: number, allowSelf: boolean) => Promise<void> = async (req: Request, res: Response, next: NextFunction, rank: number, allowSelf: boolean = false) => {
     const token = req.cookies["bs_token"]
 
     try {
@@ -15,13 +15,13 @@ const AuthMiddleware: (req: Request, res: Response, next: NextFunction, rank: nu
                 Authorization: `Bearer ${token}`
             }
         })
-        req.body.g_id = data.id
 
-        const client = await pool.connect()
+        req.body.g_id = data.id
+        if (allowSelf && req.body.g_id == req.body.github_id) next()
 
         try {
             const id = data?.id || ""
-            const { rows } = await client.query(Auth.getUser, [id])
+            const { rows } = await pool.query(Auth.getUserRank, [id])
 
             if (rows[0].min > rank)
                 throw new Error('User not authorized to perform this action.')
